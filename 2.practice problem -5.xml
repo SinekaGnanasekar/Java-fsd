@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.example.Product" table="products">
+        <!-- Other property mappings -->
+        <list name="features" table="product_features">
+            <key column="product_id" />
+            <list-index column="feature_index" />
+            <element column="feature_name" type="string" />
+        </list>
+    </class>
+</hibernate-mapping>
+<hibernate-mapping>
+    <class name="com.example.Employee" table="employees">
+        <!-- Other property mappings -->
+        <set name="projects" table="employee_projects">
+            <key column="employee_id" />
+            <many-to-many column="project_id" class="com.example.Project" />
+        </set>
+    </class>
+</hibernate-mapping>
+
+<hibernate-mapping>
+    <class name="com.example.Student" table="students">
+        <!-- Other property mappings -->
+        <bag name="courses" table="student_courses">
+            <key column="student_id" />
+            <element column="course_name" type="string" />
+        </bag>
+    </class>
+</hibernate-mapping>
+ <hibernate-mapping>
+    <class name="com.example.Order" table="orders">
+        <!-- Other property mappings -->
+        <map name="orderItems" table="order_items">
+            <key column="order_id" />
+            <map-key column="item_key" type="string" />
+            <element column="item_description" type="string" />
+        </map>
+    </class>
+</hibernate-mapping>
